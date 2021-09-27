@@ -16,17 +16,17 @@ public class DemoApplication {
     }
 
 
-    @Bean
-    CommandLineRunner runner(MonumentRepository repository){
-        return args -> {
-            Monument monument = new Monument(
-                    "name",
-                    "info",
-                    2.5
-            );
-
-            repository.insert(monument);
-        };
-    }
+//    @Bean
+//    CommandLineRunner runner(MonumentRepository repository){
+//        return args -> {
+//            Monument monument = new Monument(
+//                    "name",
+//                    "info",
+//                    2.5
+//            );
+//
+//            repository.insert(monument);
+//        };
+//    }
 
 }
