@@ -1,5 +1,4 @@
 package com.example.demo.model;
-
 import java.time.LocalDateTime;
 
 public class Profile {
@@ -12,12 +11,13 @@ public class Profile {
 
     }
 
-    public Profile(String firstName, String lastName, Integer age, LocalDateTime created) {
+    public Profile( String firstName, String lastName, Integer age, LocalDateTime created) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.created = created;
     }
+
 
     public String getFirstName() {
         return firstName;

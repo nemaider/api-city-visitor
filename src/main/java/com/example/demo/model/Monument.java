@@ -22,6 +22,7 @@ public class Monument {
     public Monument(String name, String info, Double rate) {
         this.name = name;
         this.info = info;
+        this.rate = rate;
     }
 
     public String get_id() {
