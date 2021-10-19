@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.model.Profile;
 import com.example.demo.model.users.Admin;
 import com.example.demo.service.AdminService;
-import com.example.demo.service.MonumentService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,16 +30,25 @@ public class AdminController {
         adminService.deleteAdmin(adminId);
     }
 
-    @PutMapping(path = "/update/{adminId}")
+    @PatchMapping(path = "/update/{adminId}")
     public void updateAdmin(@PathVariable("adminId") String adminId,
                             @RequestBody(required = false) Profile profile,
                             @RequestParam(required = false) String position){
         adminService.updateAdmin(adminId,profile,position);
     }
 
-    @PutMapping(path = "/change-password/{adminId}")
+    @PatchMapping(path = "/change-password/{adminId}")
     public void changeAdminPassword(@PathVariable("adminId") String adminId,
                                     @RequestParam String password){
         adminService.changeAdminPassword(adminId,password);
     }
+
+    @PatchMapping(path = "/change-email/{adminId}")
+    public void changeAdminEmail(@PathVariable("adminId") String adminId,
+                                 @RequestParam String email){
+        adminService.changeAdminEmail(adminId,email);
+    }
+
+
+
 }

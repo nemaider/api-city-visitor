@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -66,8 +67,26 @@ public class AdminService {
                 password.length()>3 &&
                 !Objects.equals(admin.getPassword(), password)){
             admin.setPassword(password);
-        } else { throw new IllegalStateException(
-                "New password is the same like an old password for admin with "+adminId+" id.");}
+        } else {
+            throw new IllegalStateException(
+                "New password is the same like an old password for admin with "+adminId+" id.");
+        }
+
+        adminRepository.save(admin);
+    }
+
+    @Transactional
+    public void changeAdminEmail(String adminId, String email) {
+        Admin admin = adminRepository.findById(adminId).
+                orElseThrow(() -> new IllegalStateException(
+                        "Admin with "+adminId+" id does not exists."));
+
+        // TODO validate email has correct form
+        if(email != null) {
+            admin.setEmail(email);
+        } else {
+            throw new IllegalStateException("Error with changing email.");
+        }
 
         adminRepository.save(admin);
     }
