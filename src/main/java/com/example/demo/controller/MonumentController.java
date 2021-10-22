@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Monument;
+import com.example.demo.model.users.Tourist;
 import com.example.demo.service.MonumentService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +15,14 @@ public class MonumentController {
 
     private final MonumentService monumentService;
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Monument> getAllMonuments(){
         return monumentService.getAllMonuments();
+    }
+
+    @GetMapping
+    public Monument getMonumentById(@RequestParam(value = "monumentId") String monumentId){
+        return monumentService.getMonumentById(monumentId);
     }
 
     @PostMapping()

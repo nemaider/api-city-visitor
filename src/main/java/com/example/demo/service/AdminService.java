@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -81,11 +80,11 @@ public class AdminService {
                 orElseThrow(() -> new IllegalStateException(
                         "Admin with "+adminId+" id does not exists."));
 
-        // TODO validate email has correct form
+        // TODO validate email has correctly form
         if(email != null) {
             admin.setEmail(email);
         } else {
-            throw new IllegalStateException("Error with changing email.");
+            throw new IllegalStateException("Error with changing admin email.");
         }
 
         adminRepository.save(admin);

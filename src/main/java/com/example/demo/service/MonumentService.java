@@ -20,6 +20,12 @@ public class MonumentService {
         return monumentRepository.findAll();
     }
 
+    public Monument getMonumentById(String monumentId) {
+        return monumentRepository.findById(monumentId)
+                .orElseThrow(() -> new IllegalStateException(
+                        "monument with " + monumentId + " does not exists."));
+    }
+
     public void addNewMonument(Monument monument) {
         monumentRepository.save(monument);
     }
@@ -55,5 +61,6 @@ public class MonumentService {
 
         monumentRepository.save(monument);
     }
+
 
 }

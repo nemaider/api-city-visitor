@@ -15,7 +15,7 @@ public class AdminController {
 
     private final AdminService adminService;
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Admin> getAllAdmins() {
         return adminService.getAllAdmins();
     }

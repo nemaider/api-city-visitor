@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -19,18 +20,27 @@ public class Tourist {
     @Indexed(unique = true)
     private String email;
 
+    private String password;
     private Profile profile;
     private List<Monument> favouriteMonuments;
 
     public Tourist() {
     }
 
-    public Tourist(String email, Profile profile, List<Monument> favouriteMonuments) {
+    public Tourist(String email, String password, Profile profile) {
         this.email = email;
         this.profile = profile;
-        this.favouriteMonuments = favouriteMonuments;
+        this.password = password;
     }
 
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getEmail() {
         return email;
@@ -49,7 +59,7 @@ public class Tourist {
     }
 
     public List<Monument> getFavouriteMonuments() {
-        return favouriteMonuments;
+        return favouriteMonuments == null ? new ArrayList<>() : favouriteMonuments;
     }
 
     public void setFavouriteMonuments(List<Monument> favouriteMonuments) {
