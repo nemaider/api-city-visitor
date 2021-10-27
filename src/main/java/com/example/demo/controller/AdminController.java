@@ -33,19 +33,19 @@ public class AdminController {
     @PatchMapping(path = "/update/{adminId}")
     public void updateAdmin(@PathVariable("adminId") String adminId,
                             @RequestBody(required = false) Profile profile,
-                            @RequestParam(required = false) String position){
+                            @RequestParam(required = false, value = "position") String position){
         adminService.updateAdmin(adminId,profile,position);
     }
 
     @PatchMapping(path = "/change-password/{adminId}")
     public void changeAdminPassword(@PathVariable("adminId") String adminId,
-                                    @RequestParam String password){
+                                    @RequestParam(value = "password") String password){
         adminService.changeAdminPassword(adminId,password);
     }
 
     @PatchMapping(path = "/change-email/{adminId}")
     public void changeAdminEmail(@PathVariable("adminId") String adminId,
-                                 @RequestParam String email){
+                                 @RequestParam(value = "email") String email){
         adminService.changeAdminEmail(adminId,email);
     }
 

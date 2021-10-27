@@ -50,5 +50,11 @@ public class TouristController {
         touristService.addMonumentToFavourite(touristId,monumentId);
     }
 
+    @PatchMapping("/remove-from-favourite")
+    public void removeMonumentFromFavourite(@RequestParam(value = "touristId") String touristId,
+                                            @RequestParam(value = "monumentId") String monumentId){
+        touristService.removeMonumentFromFavourite(touristId,monumentId);
+    }
+
 
 }

@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Monument;
-import com.example.demo.model.users.Tourist;
 import com.example.demo.service.MonumentService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -37,14 +36,9 @@ public class MonumentController {
 
     @PutMapping(path = "{monumentId}")
     public void updateMonument(@PathVariable("monumentId") String monumentId,
-                               @RequestParam(required = false) String name,
-                               @RequestParam(required = false) String info) {
+                               @RequestParam(required = false, value = "name") String name,
+                               @RequestParam(required = false, value = "info") String info) {
         monumentService.updateMonument(monumentId,name,info);
     }
-/*
-    @Autowired
-    public PlaceController(PlaceService placeService) {
-        this.placeService = placeService;
-    }
-*/
+
 }

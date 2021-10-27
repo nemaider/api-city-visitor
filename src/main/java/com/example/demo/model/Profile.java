@@ -1,17 +1,17 @@
 package com.example.demo.model;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Profile {
     private String firstName;
     private String lastName;
     private Integer age;
-    private LocalDateTime created;
+    private LocalDate created;
 
     public Profile() {
 
     }
 
-    public Profile( String firstName, String lastName, Integer age, LocalDateTime created) {
+    public Profile( String firstName, String lastName, Integer age, LocalDate created) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -43,11 +43,11 @@ public class Profile {
         this.age = age;
     }
 
-    public LocalDateTime getCreated() {
+    public LocalDate getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDateTime created) {
+    public void setCreated(LocalDate created) {
         this.created = created;
     }
 }
