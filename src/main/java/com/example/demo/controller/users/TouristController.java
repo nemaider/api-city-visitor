@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.controller.users;
 import com.example.demo.model.users.Tourist;
 import com.example.demo.service.TouristService;
 import lombok.AllArgsConstructor;

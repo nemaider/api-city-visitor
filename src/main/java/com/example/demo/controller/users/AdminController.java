@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.controller.users;
 
 import com.example.demo.model.Profile;
 import com.example.demo.model.users.Admin;

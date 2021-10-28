@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -48,7 +49,7 @@ public class City {
     }
 
     public List<Monument> getListOfMonuments() {
-        return listOfMonuments;
+        return listOfMonuments == null ? new ArrayList<>() : listOfMonuments;
     }
 
     public void setListOfMonuments(List<Monument> listOfMonuments) {

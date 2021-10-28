@@ -34,7 +34,7 @@ public class MonumentController {
          monumentService.deleteMonument(monumentId);
     }
 
-    @PutMapping(path = "{monumentId}")
+    @PatchMapping(path = "{monumentId}")
     public void updateMonument(@PathVariable("monumentId") String monumentId,
                                @RequestParam(required = false, value = "name") String name,
                                @RequestParam(required = false, value = "info") String info) {
