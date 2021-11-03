@@ -29,9 +29,14 @@ public class CityController {
         return cityService.getCityByName(cityName);
     }
 
-    @PostMapping(path = "/addCity")
+    @PostMapping(path = "/add-City")
     public void addNewCity(@RequestBody City city){
         cityService.addNewCity(city);
+    }
+
+    @DeleteMapping(path = "/deleteCity/{cityId}")
+    public void deleteCity(@PathVariable("cityId") String cityId){
+        cityService.deleteCity(cityId);
     }
 
     @PatchMapping(path = "/update-city/{cityId}")
@@ -41,22 +46,18 @@ public class CityController {
         cityService.updateCity(cityId, name, rate);
     }
 
-    @PatchMapping(path = "/attach-monument-to-city")
+    @PatchMapping(path = "/attach/monument-to-city")
     public void attachMonumentToCity(@RequestParam(value = "cityId") String cityId,
                                      @RequestParam(value = "monumentId") String monumentId){
         cityService.attachMonumentToCity(cityId,monumentId);
     }
 
-    @PatchMapping(path = "/remove-monument-from-city")
+    @PatchMapping(path = "/remove/monument-from-city")
     public void removeMonumentFromCity(@RequestParam(value = "cityId") String cityId,
                                        @RequestParam(value = "monumentId") String monumentId){
         cityService.removeMonumentFromCity(cityId,monumentId);
     }
 
-    @DeleteMapping(path = "/deleteCity/{cityId}")
-    public void deleteCity(@PathVariable("cityId") String cityId){
-        cityService.deleteCity(cityId);
-    }
 
 
 }

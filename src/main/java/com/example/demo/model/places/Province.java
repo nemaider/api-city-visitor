@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -51,7 +52,7 @@ public class Province {
     }
 
     public List<City> getListOfCities() {
-        return listOfCities;
+        return listOfCities == null ? new ArrayList<>() : listOfCities;
     }
 
     public void setListOfCities(List<City> listOfCities) {

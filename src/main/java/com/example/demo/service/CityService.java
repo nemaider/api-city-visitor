@@ -32,9 +32,9 @@ public class CityService {
     public City getCityByName(String cityName) {
         List<City> listOfCities = cityRepository.findAll();
 
-        for (City City : listOfCities) {
-            if (City.getName().equals(cityName)) {
-                return cityRepository.findById(City.get_id()).
+        for (City city : listOfCities) {
+            if (city.getName().equals(cityName)) {
+                return cityRepository.findById(city.get_id()).
                         orElseThrow(() -> new IllegalStateException("city with " + cityName + " name does not exists."));
             }
         }
@@ -81,7 +81,7 @@ public class CityService {
         Monument monument = monumentService.getMonumentById(monumentId);
 
         List<Monument> listOfMonuments = city.getListOfMonuments();
-        if(!(listOfMonuments.contains(monument))){
+        if(!listOfMonuments.contains(monument)){
             listOfMonuments.add(monument);
             city.setListOfMonuments(listOfMonuments);
             cityRepository.save(city);
