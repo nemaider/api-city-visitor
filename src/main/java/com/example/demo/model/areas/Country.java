@@ -1,6 +1,5 @@
-package com.example.demo.model.places;
+package com.example.demo.model.areas;
 
-import com.example.demo.model.Monument;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,19 +8,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@Document(collection = "cities")
-public class City {
+@Document(collection = "countries")
+public class Country {
     @Id
     private String _id;
 
     private String name;
     private Double rate;
-    private List<Monument> listOfMonuments;
+    private List<Province> listOfProvinces;
 
-    public City(String name, Double rate, List<Monument> listOfMonuments) {
+    public Country() {
+    }
+
+    public Country(String name, Double rate, List<Province> listOfProvinces) {
         this.name = name;
         this.rate = rate;
-        this.listOfMonuments = listOfMonuments;
+        this.listOfProvinces = listOfProvinces;
     }
 
     public String get_id() {
@@ -48,11 +50,11 @@ public class City {
         this.rate = rate;
     }
 
-    public List<Monument> getListOfMonuments() {
-        return listOfMonuments == null ? new ArrayList<>() : listOfMonuments;
+    public List<Province> getListOfProvinces() {
+        return listOfProvinces == null ? new ArrayList<>() : listOfProvinces;
     }
 
-    public void setListOfMonuments(List<Monument> listOfMonuments) {
-        this.listOfMonuments = listOfMonuments;
+    public void setListOfProvinces(List<Province> listOfProvinces) {
+        this.listOfProvinces = listOfProvinces;
     }
 }

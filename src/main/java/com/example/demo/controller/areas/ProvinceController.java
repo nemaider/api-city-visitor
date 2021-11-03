@@ -1,7 +1,7 @@
-package com.example.demo.controller.places;
+package com.example.demo.controller.areas;
 
 
-import com.example.demo.model.places.Province;
+import com.example.demo.model.areas.Province;
 import com.example.demo.service.ProvinceService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/provincies")
+@RequestMapping("/api/v1/provinces")
 @AllArgsConstructor
 public class ProvinceController {
     private final ProvinceService provinceService;
@@ -24,23 +24,23 @@ public class ProvinceController {
         return provinceService.getProvinceById(provinceId);
     }
 
-    @GetMapping
-    public Province getProvinceByName(@RequestParam(value = "provinceName") String provinceName){
+    @GetMapping(path = "/{provinceName}")
+    public Province getProvinceByName(@PathVariable("provinceName") String provinceName){
         return provinceService.getProvinceByName(provinceName);
     }
 
-    @PostMapping(path = "/add-province")
+    @PostMapping(path = "/add")
     public void addNewProvince(@RequestBody Province province){
         provinceService.addNewProvince(province);
     }
 
-    @DeleteMapping(path = "/delete-province/{provinceId}")
+    @DeleteMapping(path = "/delete/{provinceId}")
     public void deleteProvince(@PathVariable("provinceId") String provinceId){
         provinceService.deleteProvince(provinceId);
     }
 
 
-    @PatchMapping(path = "/update-province/{provinceId}")
+    @PatchMapping(path = "/update/{provinceId}")
     public void updateProvince(@PathVariable("provinceId") String provinceId,
                                @RequestParam(required = false, value = "name") String name,
                                @RequestParam(required = false, value = "rate") Double rate){

@@ -1,4 +1,5 @@
-package com.example.demo.model.places;
+package com.example.demo.model.areas;
+
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -8,22 +9,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@Document(collection = "countries")
-public class Country {
+@Document(collection = "provinces")
+public class Province {
     @Id
     private String _id;
 
     private String name;
     private Double rate;
-    private List<Province> listOfProvinces;
+    private List<City> listOfCities;
 
-    public Country() {
+    public Province() {
     }
 
-    public Country(String name, Double rate, List<Province> listOfProvinces) {
+    public Province(String name, Double rate, List<City> listOfCities) {
         this.name = name;
         this.rate = rate;
-        this.listOfProvinces = listOfProvinces;
+        this.listOfCities = listOfCities;
     }
 
     public String get_id() {
@@ -50,11 +51,13 @@ public class Country {
         this.rate = rate;
     }
 
-    public List<Province> getListOfProvinces() {
-        return listOfProvinces == null ? new ArrayList<>() : listOfProvinces;
+    public List<City> getListOfCities() {
+        return listOfCities == null ? new ArrayList<>() : listOfCities;
     }
 
-    public void setListOfProvinces(List<Province> listOfProvinces) {
-        this.listOfProvinces = listOfProvinces;
+    public void setListOfCities(List<City> listOfCities) {
+        this.listOfCities = listOfCities;
     }
 }
+
+

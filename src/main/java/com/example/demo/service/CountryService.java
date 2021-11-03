@@ -1,8 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.model.places.City;
-import com.example.demo.model.places.Country;
-import com.example.demo.model.places.Province;
+import com.example.demo.model.areas.Country;
+import com.example.demo.model.areas.Province;
 import com.example.demo.repository.CountryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

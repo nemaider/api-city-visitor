@@ -20,7 +20,7 @@ public class AdminController {
         return adminService.getAllAdmins();
     }
 
-    @PostMapping()
+    @PostMapping(path = "/add")
     public void addNewAdmin(@RequestBody Admin admin){
         adminService.addNewAdmin(admin);
     }

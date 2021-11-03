@@ -1,6 +1,6 @@
-package com.example.demo.controller.places;
+package com.example.demo.controller.areas;
 
-import com.example.demo.model.places.Country;
+import com.example.demo.model.areas.Country;
 import com.example.demo.service.CountryService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -23,23 +23,23 @@ public class CountryController {
         return countryService.getCountryById(provinceId);
     }
 
-    @GetMapping
-    public Country getCountryByName(@RequestParam(value = "countryName") String countryName){
+    @GetMapping(path = "/{countryName}")
+    public Country getCountryByName(@PathVariable("countryName") String countryName){
         return countryService.getCountryByName(countryName);
     }
 
-    @PostMapping(path = "/add-country")
+    @PostMapping(path = "/add")
     public void addNewCountry(@RequestBody Country country){
         countryService.addNewCountry(country);
     }
 
-    @DeleteMapping(path = "/delete-country/{countryId}")
+    @DeleteMapping(path = "/delete/{countryId}")
     public void deleteCountry(@PathVariable("countryId") String countryId){
         countryService.deleteCountry(countryId);
     }
 
 
-    @PatchMapping(path = "/update-country/{countryId}")
+    @PatchMapping(path = "/update/{countryId}")
     public void updateCountry(@PathVariable("countryId") String countryId,
                                @RequestParam(required = false, value = "name") String name,
                                @RequestParam(required = false, value = "rate") Double rate){

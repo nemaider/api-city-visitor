@@ -30,7 +30,7 @@ public class TouristService {
     }
 
     public void addNewTourists(Tourist tourist) {
-        Profile profile = new Profile();
+        Profile profile = tourist.getProfile();
         profile.setCreated(LocalDate.now(ZoneId.of("Europe/Paris")));
         tourist.setProfile(profile);
         touristRepository.save(tourist);
@@ -58,7 +58,7 @@ public class TouristService {
             tourist.setPassword(password);
         } else {
             throw new IllegalStateException(
-                    "New password is the same like an old password for admin with "+touristId+" id.");
+                    "New password is the same like an old password for admin with "+touristId+" id or is less than 3 characters.");
         }
 
         touristRepository.save(tourist);
@@ -71,11 +71,14 @@ public class TouristService {
                         "Tourist with "+touristId+" id does not exists."));
 
         // TODO validate email has correctly form
-        if(email != null){
+        if(email != null &&
+                !Objects.equals(tourist.getEmail(), email)){
             tourist.setEmail(email);
         } else {
             throw new IllegalStateException("Error with changing tourist email.");
         }
+
+        touristRepository.save(tourist);
     }
 
 
@@ -89,7 +92,7 @@ public class TouristService {
             tourist.setFavouriteMonuments(listOfMonuments);
             touristRepository.save(tourist);
         } else {
-            throw new IllegalStateException("Given momument("+monumentId+" id) already exists in favourites for tourist ("+touristId+" id).");
+            throw new IllegalStateException("Given momument("+monumentId+" id) is already exists in favourites for given tourist ("+touristId+" id).");
         }
     }
 
