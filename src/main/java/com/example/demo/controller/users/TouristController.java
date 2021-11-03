@@ -22,7 +22,7 @@ public class TouristController {
         return touristService.getTouristById(touristId);
     }
 
-    @PostMapping()
+    @PostMapping(path = "/add")
     public void addNewTourist(@RequestBody Tourist tourist){
         touristService.addNewTourists(tourist);
     }

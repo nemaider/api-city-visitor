@@ -24,17 +24,17 @@ public class MonumentController {
         return monumentService.getMonumentById(monumentId);
     }
 
-    @PostMapping()
+    @PostMapping(path = "/add")
     public void addNewMonument(@RequestBody Monument monument){
         monumentService.addNewMonument(monument);
     }
 
-    @DeleteMapping(path = "{monumentId}")
+    @DeleteMapping(path = "/delete/{monumentId}")
     public void deleteMonument(@PathVariable("monumentId") String monumentId){
          monumentService.deleteMonument(monumentId);
     }
 
-    @PatchMapping(path = "{monumentId}")
+    @PatchMapping(path = "/update/{monumentId}")
     public void updateMonument(@PathVariable("monumentId") String monumentId,
                                @RequestParam(required = false, value = "name") String name,
                                @RequestParam(required = false, value = "info") String info) {

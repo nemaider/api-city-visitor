@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,6 +23,9 @@ public class AdminService {
     }
 
     public void addNewAdmin(Admin admin) {
+        Profile profile = admin.getProfile();
+        profile.setCreated(LocalDate.now(ZoneId.of("Europe/Paris")));
+        admin.setProfile(profile);
         adminRepository.save(admin);
     }
 
@@ -44,8 +49,11 @@ public class AdminService {
 
         if(profile != null &&
                 !Objects.equals(admin.getProfile(), profile)) {
+            Profile actualProfile = admin.getProfile();
+            profile.setCreated(actualProfile.getCreated());
             admin.setProfile(profile);
         }
+
 
         if(position != null &&
                 !Objects.equals(admin.getPosition(), position)){
@@ -68,7 +76,7 @@ public class AdminService {
             admin.setPassword(password);
         } else {
             throw new IllegalStateException(
-                "New password is the same like an old password for admin with "+adminId+" id.");
+                "New password is the same like an old password for admin with "+adminId+" id or is less than 3 characters.");
         }
 
         adminRepository.save(admin);
@@ -81,7 +89,8 @@ public class AdminService {
                         "Admin with "+adminId+" id does not exists."));
 
         // TODO validate email has correctly form
-        if(email != null) {
+        if(email != null &&
+                !Objects.equals(admin.getEmail(), email)) {
             admin.setEmail(email);
         } else {
             throw new IllegalStateException("Error with changing admin email.");

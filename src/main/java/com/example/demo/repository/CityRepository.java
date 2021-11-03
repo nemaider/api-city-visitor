@@ -1,6 +1,6 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.places.City;
+import com.example.demo.model.areas.City;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
