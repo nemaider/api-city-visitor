@@ -18,6 +18,10 @@ public class City {
     private Double rate;
     private List<Monument> listOfMonuments;
 
+    public City(){
+
+    }
+
     public City(String name, Double rate, List<Monument> listOfMonuments) {
         this.name = name;
         this.rate = rate;

@@ -1,5 +1,7 @@
 package com.example.demo.controller.areas;
 
+import com.example.demo.DTO.areasDTO.CityDTO;
+import com.example.demo.converter.CityConverter;
 import com.example.demo.model.areas.City;
 import com.example.demo.service.CityService;
 import lombok.AllArgsConstructor;
@@ -13,25 +15,26 @@ import java.util.List;
 public class CityController {
 
     private final CityService cityService;
+    private final CityConverter converter;
 
     @GetMapping("/all")
-    public List<City> getAllCities() {
-        return cityService.getAllCities();
+    public List<CityDTO> getAllCities() {
+        return converter.entityToDTO(cityService.getAllCities());
     }
 
     @GetMapping
-    public City getCityById(@RequestParam(value = "cityId") String cityId){
-        return cityService.getCityById(cityId);
+    public CityDTO getCityById(@RequestParam(value = "cityId") String cityId){
+        return converter.entityToDTO(cityService.getCityById(cityId));
     }
 
     @GetMapping(path = "/{cityName}")
-    public City getCityByName(@PathVariable("cityName") String cityName){
-        return cityService.getCityByName(cityName);
+    public CityDTO getCityByName(@PathVariable("cityName") String cityName){
+        return converter.entityToDTO(cityService.getCityByName(cityName));
     }
 
     @PostMapping(path = "/add")
-    public void addNewCity(@RequestBody City city){
-        cityService.addNewCity(city);
+    public void addNewCity(@RequestBody CityDTO city){
+        cityService.addNewCity(converter.dtoToEntity(city));
     }
 
     @DeleteMapping(path = "/delete/{cityId}")

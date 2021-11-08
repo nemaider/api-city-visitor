@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.DTO.MonumentDTO;
+import com.example.demo.converter.MonumentConverter;
 import com.example.demo.model.Monument;
 import com.example.demo.service.MonumentService;
 import lombok.AllArgsConstructor;
@@ -13,20 +15,22 @@ import java.util.List;
 public class MonumentController {
 
     private final MonumentService monumentService;
+    private final MonumentConverter converter;
 
     @GetMapping("/all")
-    public List<Monument> getAllMonuments(){
-        return monumentService.getAllMonuments();
+    public List<MonumentDTO> getAllMonuments(){
+        return converter.entityToDTO(monumentService.getAllMonuments());
+
     }
 
     @GetMapping
-    public Monument getMonumentById(@RequestParam(value = "monumentId") String monumentId){
-        return monumentService.getMonumentById(monumentId);
+    public MonumentDTO getMonumentById(@RequestParam(value = "monumentId") String monumentId){
+        return converter.entityToDTO(monumentService.getMonumentById(monumentId));
     }
 
     @PostMapping(path = "/add")
-    public void addNewMonument(@RequestBody Monument monument){
-        monumentService.addNewMonument(monument);
+    public void addNewMonument(@RequestBody MonumentDTO monument){
+        monumentService.addNewMonument(converter.dtoToEntity(monument));
     }
 
     @DeleteMapping(path = "/delete/{monumentId}")

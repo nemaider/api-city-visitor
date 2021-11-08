@@ -1,4 +1,6 @@
 package com.example.demo.controller.users;
+import com.example.demo.DTO.usersDTO.TouristDTO;
+import com.example.demo.converter.TouristConverter;
 import com.example.demo.model.users.Tourist;
 import com.example.demo.service.TouristService;
 import lombok.AllArgsConstructor;
@@ -10,21 +12,22 @@ import java.util.List;
 @RequestMapping(path = "/api/v1/tourists")
 @AllArgsConstructor
 public class TouristController {
-    TouristService touristService;
+    private final TouristService touristService;
+    private final TouristConverter converter;
 
     @GetMapping("/all")
-    public List<Tourist> getAllTourists() {
-        return touristService.getAllTourists();
+    public List<TouristDTO> getAllTourists() {
+        return converter.entityToDTO(touristService.getAllTourists());
     }
 
     @GetMapping
-    public Tourist getTouristById(@RequestParam(value = "touristId") String touristId){
-        return touristService.getTouristById(touristId);
+    public TouristDTO getTouristById(@RequestParam(value = "touristId") String touristId){
+        return converter.entityToDTO(touristService.getTouristById(touristId));
     }
 
     @PostMapping(path = "/add")
-    public void addNewTourist(@RequestBody Tourist tourist){
-        touristService.addNewTourists(tourist);
+    public void addNewTourist(@RequestBody TouristDTO tourist){
+        touristService.addNewTourists(converter.dtoToEntity(tourist));
     }
 
     @DeleteMapping("/delete/{touristId}")

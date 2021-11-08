@@ -1,5 +1,7 @@
 package com.example.demo.controller.users;
 
+import com.example.demo.DTO.usersDTO.AdminDTO;
+import com.example.demo.converter.AdminConverter;
 import com.example.demo.model.Profile;
 import com.example.demo.model.users.Admin;
 import com.example.demo.service.AdminService;
@@ -14,15 +16,16 @@ import java.util.List;
 public class AdminController {
 
     private final AdminService adminService;
+    private final AdminConverter converter;
 
     @GetMapping("/all")
-    public List<Admin> getAllAdmins() {
-        return adminService.getAllAdmins();
+    public List<AdminDTO> getAllAdmins() {
+        return converter.entityToDTO(adminService.getAllAdmins());
     }
 
     @PostMapping(path = "/add")
-    public void addNewAdmin(@RequestBody Admin admin){
-        adminService.addNewAdmin(admin);
+    public void addNewAdmin(@RequestBody AdminDTO admin){
+        adminService.addNewAdmin(converter.dtoToEntity(admin));
     }
 
     @DeleteMapping(path = "/delete/{adminId}")
