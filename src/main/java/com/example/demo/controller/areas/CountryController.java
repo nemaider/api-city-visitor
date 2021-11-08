@@ -1,5 +1,7 @@
 package com.example.demo.controller.areas;
 
+import com.example.demo.DTO.areasDTO.CountryDTO;
+import com.example.demo.converter.CountryConverter;
 import com.example.demo.model.areas.Country;
 import com.example.demo.service.CountryService;
 import lombok.AllArgsConstructor;
@@ -12,25 +14,26 @@ import java.util.List;
 @AllArgsConstructor
 public class CountryController {
     private final CountryService countryService;
+    private final CountryConverter converter;
 
     @GetMapping("/all")
-    public List<Country> getAllCountries(){
-        return countryService.getAllCountries();
+    public List<CountryDTO> getAllCountries(){
+        return converter.entityToDTO(countryService.getAllCountries());
     }
 
     @GetMapping
-    public Country getCountryById(@RequestParam(value = "countryId") String provinceId){
-        return countryService.getCountryById(provinceId);
+    public CountryDTO getCountryById(@RequestParam(value = "countryId") String provinceId){
+        return converter.entityToDTO(countryService.getCountryById(provinceId));
     }
 
     @GetMapping(path = "/{countryName}")
-    public Country getCountryByName(@PathVariable("countryName") String countryName){
-        return countryService.getCountryByName(countryName);
+    public CountryDTO getCountryByName(@PathVariable("countryName") String countryName){
+        return converter.entityToDTO(countryService.getCountryByName(countryName));
     }
 
     @PostMapping(path = "/add")
-    public void addNewCountry(@RequestBody Country country){
-        countryService.addNewCountry(country);
+    public void addNewCountry(@RequestBody CountryDTO country){
+        countryService.addNewCountry(converter.dtoToEntity(country));
     }
 
     @DeleteMapping(path = "/delete/{countryId}")

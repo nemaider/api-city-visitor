@@ -1,6 +1,8 @@
 package com.example.demo.controller.areas;
 
 
+import com.example.demo.DTO.areasDTO.ProvinceDTO;
+import com.example.demo.converter.ProvinceConverter;
 import com.example.demo.model.areas.Province;
 import com.example.demo.service.ProvinceService;
 import lombok.AllArgsConstructor;
@@ -13,25 +15,26 @@ import java.util.List;
 @AllArgsConstructor
 public class ProvinceController {
     private final ProvinceService provinceService;
+    private final ProvinceConverter converter;
 
     @GetMapping("/all")
-    public List<Province> getAllProvinces(){
-        return provinceService.getAllProvinces();
+    public List<ProvinceDTO> getAllProvinces(){
+        return converter.entityToDTO(provinceService.getAllProvinces());
     }
 
     @GetMapping
-    public Province getProvinceById(@RequestParam(value = "provinceId") String provinceId){
-        return provinceService.getProvinceById(provinceId);
+    public ProvinceDTO getProvinceById(@RequestParam(value = "provinceId") String provinceId){
+        return converter.entityToDTO(provinceService.getProvinceById(provinceId));
     }
 
     @GetMapping(path = "/{provinceName}")
-    public Province getProvinceByName(@PathVariable("provinceName") String provinceName){
-        return provinceService.getProvinceByName(provinceName);
+    public ProvinceDTO getProvinceByName(@PathVariable("provinceName") String provinceName){
+        return converter.entityToDTO(provinceService.getProvinceByName(provinceName));
     }
 
     @PostMapping(path = "/add")
-    public void addNewProvince(@RequestBody Province province){
-        provinceService.addNewProvince(province);
+    public void addNewProvince(@RequestBody ProvinceDTO province){
+        provinceService.addNewProvince(converter.dtoToEntity(province));
     }
 
     @DeleteMapping(path = "/delete/{provinceId}")
