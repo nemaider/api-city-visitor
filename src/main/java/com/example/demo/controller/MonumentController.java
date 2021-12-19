@@ -1,13 +1,13 @@
 package com.example.demo.controller;
 
+import com.example.demo.DTO.FiltersDTO;
+import com.example.demo.DTO.DataDTO;
 import com.example.demo.DTO.MonumentDTO;
+import com.example.demo.DTO.MonumentDataDTO;
 import com.example.demo.converter.MonumentConverter;
-import com.example.demo.model.Monument;
 import com.example.demo.service.MonumentService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/v1/monuments")
@@ -18,9 +18,19 @@ public class MonumentController {
     private final MonumentConverter converter;
 
     @GetMapping("/all")
-    public List<MonumentDTO> getAllMonuments(){
-        return converter.entityToDTO(monumentService.getAllMonuments());
+    public DataDTO getAllMonuments(){
+        return new DataDTO(converter.entityToDTO(monumentService.getAllMonuments()));
+    }
 
+    @GetMapping("/all-data")
+    public MonumentDataDTO getAllData(){
+        return new MonumentDataDTO(monumentService.getAllCategories(),converter.entityToDTO(monumentService.getAllMonuments()));
+
+    }
+
+    @GetMapping("/categories")
+    public FiltersDTO getAllCategories(){
+        return monumentService.getAllCategories();
     }
 
     @GetMapping

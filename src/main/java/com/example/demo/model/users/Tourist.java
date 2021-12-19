@@ -23,7 +23,6 @@ public class Tourist {
 
     private String password;
     private Profile profile;
-    @DBRef(lazy = true)
     private List<Monument> favouriteMonuments;
 
     public Tourist() {

@@ -15,14 +15,26 @@ public class Monument {
     private String info;
     private Double rate;
 
+    private String website;
+
+    // x,y for any monument
+    private Geo geo;
+
+    //category for filter results with all monuments
+    private String category;
+
+
     public Monument() {
 
     }
 
-    public Monument(String name, String info, Double rate) {
+    public Monument(String name, String info, Double rate, Geo geo, String category, String website) {
         this.name = name;
         this.info = info;
         this.rate = rate;
+        this.geo = geo;
+        this.category = category;
+        this.website = website;
     }
 
     public String get_id() {

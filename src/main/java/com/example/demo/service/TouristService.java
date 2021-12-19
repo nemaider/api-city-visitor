@@ -111,4 +111,9 @@ public class TouristService {
         tourist.setFavouriteMonuments(listOfMonuments);
         touristRepository.save(tourist);
     }
+
+    public List<Monument> getAllFavouriteMonuments(String touristId){
+        Tourist tourist = getTouristById(touristId);
+        return tourist.getFavouriteMonuments();
+    }
 }
