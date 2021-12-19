@@ -1,15 +1,14 @@
 package com.example.demo.service;
 
 
-import com.example.demo.DTO.FiltersDTO;
 import com.example.demo.model.Monument;
 import com.example.demo.repository.MonumentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.Objects;
 
 @Service
 @AllArgsConstructor
@@ -19,13 +18,6 @@ public class MonumentService {
 
     public List<Monument> getAllMonuments() {
         return monumentRepository.findAll();
-    }
-
-    public FiltersDTO getAllCategories(){
-        FiltersDTO filtersDTO = new FiltersDTO(monumentRepository.findAll()
-                .stream().map(Monument::getCategory)
-                .collect(Collectors.toSet()));
-        return filtersDTO;
     }
 
     public Monument getMonumentById(String monumentId) {

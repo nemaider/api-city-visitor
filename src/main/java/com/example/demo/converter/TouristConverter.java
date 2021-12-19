@@ -1,8 +1,6 @@
 package com.example.demo.converter;
 
-import com.example.demo.DTO.MonumentDTO;
 import com.example.demo.DTO.usersDTO.TouristDTO;
-import com.example.demo.model.Monument;
 import com.example.demo.model.users.Tourist;
 import org.springframework.stereotype.Component;
 
@@ -39,9 +37,5 @@ public class TouristConverter {
 
     public static List<TouristDTO> entityToDTO(List<Tourist> entity){
         return entity.stream().map(TouristConverter::entityToDTO).collect(Collectors.toList());
-    }
-
-    public static List<MonumentDTO> monumentEntityToDTO(List<Monument> entity){
-        return entity.stream().map(MonumentConverter::entityToDTO).collect(Collectors.toList());
     }
 }
