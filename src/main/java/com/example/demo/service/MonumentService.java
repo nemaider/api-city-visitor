@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 
+import com.example.demo.DTO.FiltersDTO;
 import com.example.demo.model.Monument;
 import com.example.demo.repository.MonumentRepository;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -24,6 +26,13 @@ public class MonumentService {
         return monumentRepository.findById(monumentId)
                 .orElseThrow(() -> new IllegalStateException(
                         "monument with " + monumentId + " does not exists."));
+    }
+
+    public FiltersDTO getAllCategories(){
+        FiltersDTO filtersDTO = new FiltersDTO(monumentRepository.findAll()
+                .stream().map(Monument::getCategory)
+                .collect(Collectors.toSet()));
+        return filtersDTO;
     }
 
     public void addNewMonument(Monument monument) {
