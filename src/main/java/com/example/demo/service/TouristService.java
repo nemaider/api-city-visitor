@@ -102,7 +102,7 @@ public class TouristService {
 
         List<Monument> listOfMonuments = tourist.getFavouriteMonuments();
         for(int i=0; i< listOfMonuments.size(); i++){
-            if(listOfMonuments.get(i).equals(monument)){
+            if(listOfMonuments.get(i).get_id().equals(monument.get_id())){
                 listOfMonuments.remove(i);
                 break;
             }
