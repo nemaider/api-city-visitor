@@ -17,6 +17,9 @@ public class MonumentConverter {
         monument.setName(dto.getName());
         monument.setInfo(dto.getInfo());
         monument.setRate(dto.getRate());
+        monument.setGeo(dto.getGeo());
+        monument.setCategory(dto.getCategory());
+        monument.setWebsite(dto.getWebsite());
 
         return monument;
     }
@@ -31,6 +34,9 @@ public class MonumentConverter {
         monumentDTO.setName(entity.getName());
         monumentDTO.setInfo(entity.getInfo());
         monumentDTO.setRate(entity.getRate());
+        monumentDTO.setGeo(entity.getGeo());
+        monumentDTO.setCategory(entity.getCategory());
+        monumentDTO.setWebsite(entity.getWebsite());
 
         return monumentDTO;
     }

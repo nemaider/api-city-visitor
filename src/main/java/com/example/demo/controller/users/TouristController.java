@@ -1,7 +1,9 @@
 package com.example.demo.controller.users;
+import com.example.demo.DTO.MonumentDataDTO;
 import com.example.demo.DTO.usersDTO.TouristDTO;
 import com.example.demo.converter.TouristConverter;
 import com.example.demo.model.users.Tourist;
+import com.example.demo.service.MonumentService;
 import com.example.demo.service.TouristService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,19 +17,27 @@ public class TouristController {
     private final TouristService touristService;
     private final TouristConverter converter;
 
+    private final MonumentService monumentService;
+
     @GetMapping("/all")
     public List<TouristDTO> getAllTourists() {
-        return converter.entityToDTO(touristService.getAllTourists());
+        return TouristConverter.entityToDTO(touristService.getAllTourists());
     }
 
     @GetMapping
     public TouristDTO getTouristById(@RequestParam(value = "touristId") String touristId){
-        return converter.entityToDTO(touristService.getTouristById(touristId));
+        return TouristConverter.entityToDTO(touristService.getTouristById(touristId));
+    }
+
+    @GetMapping("/getAllFavouritesMonuments")
+    public MonumentDataDTO getAllFavouritesMonuments(@RequestParam(value = "touristId") String touristId){
+        return new MonumentDataDTO(monumentService.getAllCategories(),
+                TouristConverter.monumentEntityToDTO(touristService.getAllFavouriteMonuments(touristId)));
     }
 
     @PostMapping(path = "/add")
     public void addNewTourist(@RequestBody TouristDTO tourist){
-        touristService.addNewTourists(converter.dtoToEntity(tourist));
+        touristService.addNewTourists(TouristConverter.dtoToEntity(tourist));
     }
 
     @DeleteMapping("/delete/{touristId}")

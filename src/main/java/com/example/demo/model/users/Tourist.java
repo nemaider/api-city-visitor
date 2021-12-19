@@ -5,6 +5,7 @@ import com.example.demo.model.Profile;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class Tourist {
 
     private String password;
     private Profile profile;
+    @DBRef(lazy = true)
     private List<Monument> favouriteMonuments;
 
     public Tourist() {

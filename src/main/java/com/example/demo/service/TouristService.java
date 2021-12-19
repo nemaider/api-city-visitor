@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -87,13 +88,30 @@ public class TouristService {
         Monument monument = monumentService.getMonumentById(monumentId);
 
         List<Monument> listOfMonuments = tourist.getFavouriteMonuments();
-        if(!(listOfMonuments.contains(monument))) {
+//        if(!(listOfMonuments.contains(monument))) {
+//            listOfMonuments.add(monument);
+//            tourist.setFavouriteMonuments(listOfMonuments);
+//            touristRepository.save(tourist);
+//        } else {
+//            throw new IllegalStateException("Given momument("+monumentId+" id) is already exists in favourites for given tourist ("+touristId+" id).");
+//        }
+
+        //I am very apologize for this work around, I known that mistake but already idk how
+        //it's just TODO in the future
+        
+        List<Boolean> listOfTruth = new ArrayList<>();
+        for (Monument listOfMonument : listOfMonuments) {
+            listOfTruth.add(listOfMonument.get_id().equals(monument.get_id()));
+        }
+
+        if(listOfTruth.contains(true)){
+            throw new IllegalStateException("Given momument("+monumentId+" id) is already exists in favourites for given tourist ("+touristId+" id).");
+        } else {
             listOfMonuments.add(monument);
             tourist.setFavouriteMonuments(listOfMonuments);
             touristRepository.save(tourist);
-        } else {
-            throw new IllegalStateException("Given momument("+monumentId+" id) is already exists in favourites for given tourist ("+touristId+" id).");
         }
+
     }
 
     public void removeMonumentFromFavourite(String touristId, String monumentId) {
@@ -102,7 +120,7 @@ public class TouristService {
 
         List<Monument> listOfMonuments = tourist.getFavouriteMonuments();
         for(int i=0; i< listOfMonuments.size(); i++){
-            if(listOfMonuments.get(i).equals(monument)){
+            if(listOfMonuments.get(i).get_id().equals(monument.get_id())){
                 listOfMonuments.remove(i);
                 break;
             }
@@ -110,5 +128,10 @@ public class TouristService {
 
         tourist.setFavouriteMonuments(listOfMonuments);
         touristRepository.save(tourist);
+    }
+
+    public List<Monument> getAllFavouriteMonuments(String touristId){
+        Tourist tourist = getTouristById(touristId);
+        return tourist.getFavouriteMonuments();
     }
 }

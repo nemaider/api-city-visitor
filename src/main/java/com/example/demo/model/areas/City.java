@@ -3,6 +3,7 @@ package com.example.demo.model.areas;
 import com.example.demo.model.Monument;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class City {
 
     private String name;
     private Double rate;
+    @DBRef(lazy = true)
     private List<Monument> listOfMonuments;
 
     public City(){
